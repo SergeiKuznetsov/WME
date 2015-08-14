@@ -47,8 +47,8 @@ function WME_Corrector_bootstrap() {
 
 function WME_Corrector_init() {
 	console_log("Init...");
-	function waitForCountryTop () {
-		console_log("Init...");
+	function loadingRules() {
+		console_log("Loading rules...");
 		var myWaze = unsafeWindow.Waze;
 		if (myWaze && myWaze.model && myWaze.model.countries && myWaze.model.countries.top && myWaze.model.countries.top.id) {
 			var myCountryName = myWaze.model.countries.objects[myWaze.model.countries.top.id].name;  
@@ -87,9 +87,9 @@ function WME_Corrector_init() {
         return myWaze.model.countries.top.id ;
     }
     else {
-        setTimeout (function () {waitForCountryTop();}, 1000);
+        setTimeout (function() {loadingRules();}, 1000);
     }
-	} // waitForCountryTop
+	} // loadingRules
 
   if ('undefined' == typeof WME_CRT_onload) {       
         unsafeWindow.WME_CRT_onload = "In Progress";
