@@ -48,39 +48,40 @@ function WME_Corrector_init() {
 		if (myWaze && myWaze.model && myWaze.model.countries && myWaze.model.countries.top && myWaze.model.countries.top.id) {
 			var myCountryName = myWaze.model.countries.objects[myWaze.model.countries.top.id].name;
 			switch (myWaze.model.countries.top.id) {
+				case 37: // Belarus
 				case 186: // Russia
-					unsafeWindow.mainDictionnaryKey = '18qup6nGuy6f0n0Jw-nCHcrJmH70aPJzYtkyfaWzZaPE';
-					unsafeWindow.publicDictionnarykey = '1CLMGOuANq-1-XI4TYMoQ-Aqx5rlDXFPkZdryZt8IhT4';
+					unsafeWindow.unconditionalRulesKey = '18qup6nGuy6f0n0Jw-nCHcrJmH70aPJzYtkyfaWzZaPE';
+					unsafeWindow.optionalRuleskey = '1CLMGOuANq-1-XI4TYMoQ-Aqx5rlDXFPkZdryZt8IhT4';
 					break;
 				default:
 					alert("WME Corrector\n\nНе найдены правила для страны " + myCountryName + " " + myWaze.model.countries.top.id);
 					unsafeWindow.WME_CRT_onload = "Error";
-					delete WME_CRT_1_mainDictionaryTxt;
-					delete WME_CRT_1_publicDictionaryTxt;
+					delete WME_CRT_1_unconditionalRulesTxt;
+					delete WME_CRT_1_optionalRulesTxt;
 					return;
 			}
 			GM_xmlhttpRequest({
 				method: 'GET',
-				url: 'https://docs.google.com/spreadsheets/d/' + unsafeWindow.mainDictionnaryKey + '/export?format=csv', // безусловные правила
+				url: 'https://docs.google.com/spreadsheets/d/' + unsafeWindow.unconditionalRulesKey + '/export?format=csv', // безусловные правила
 				headers: {
 					"User-Agent": "Mozilla/5.0",
 					"Accept": "text/plain"
 				},
 				synchronous: false,
 				onload: function(mainDictionary) {
-					unsafeWindow.WME_CRN_1_mainDictionaryTxt = mainDictionary.responseText;
+					unsafeWindow.WME_CRN_1_unconditionalRulesTxt = unconditionalRules.responseText;
 				}
 			});
 			GM_xmlhttpRequest({
 				method: 'GET',
-				url: 'https://docs.google.com/spreadsheets/d/' + unsafeWindow.publicDictionnarykey + '/export?format=csv', // опциональные правила
+				url: 'https://docs.google.com/spreadsheets/d/' + unsafeWindow.optionalRuleskey + '/export?format=csv', // опциональные правила
 				headers: {
 					"User-Agent": "Mozilla/5.0",
 					"Accept": "text/plain"
 				},
 				synchronous: false,
 				onload: function(publicDictionary) {
-					unsafeWindow.WME_CRT_1_publicDictionaryTxt = publicDictionary.responseText;
+					unsafeWindow.WME_CRT_1_optionalRulesTxt = optionalRules.responseText;
 				}
 			});
 			return myWaze.model.countries.top.id;
@@ -93,11 +94,11 @@ function WME_Corrector_init() {
 
 	if ('undefined' == typeof WME_CRT_onload) {
 		unsafeWindow.WME_CRT_onload = "In Progress";
-		unsafeWindow.WME_CRT_1_mainDictionaryTxt = "In Progress";
-		unsafeWindow.WME_CRT_1_publicDictionaryTxt = "In Progress";
-		var mainDictionnaryURL = '';
-		var publicDictionnaryURL = '';
-		waitForCountryTop();
+		unsafeWindow.WME_CRT_1_unconditionalRulesTxt = "In Progress";
+		unsafeWindow.WME_CRT_1_optionalRulesTxt = "In Progress";
+		var unconditionalRulesURL = '';
+		var optionalRulesURL = '';
+		loadingRules();
 	};
 	if ('undefined' == typeof __RTLM_PAGE_SCOPE_RUN__) {
 		(function page_scope_runner() {
