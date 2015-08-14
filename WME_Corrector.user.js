@@ -48,22 +48,22 @@ function WME_Corrector_bootstrap() {
 function WME_Corrector_init() {
 	console_log("Init...");
 	function waitForCountryTop () {
+		console_log("Init...");
 		var myWaze = unsafeWindow.Waze;
 		if (myWaze && myWaze.model && myWaze.model.countries && myWaze.model.countries.top && myWaze.model.countries.top.id) {
 			var myCountryName = myWaze.model.countries.objects[myWaze.model.countries.top.id].name;  
-      switch(myWaze.model.countries.top.id) {
+			switch(myWaze.model.countries.top.id) {
 				case 186:	// Russia
-                unsafeWindow.mainDictionnaryKey = '18qup6nGuy6f0n0Jw-nCHcrJmH70aPJzYtkyfaWzZaPE';
-                unsafeWindow.publicDictionnarykey = '1CLMGOuANq-1-XI4TYMoQ-Aqx5rlDXFPkZdryZt8IhT4';
-                break;
-        default:
-                alert ("WME Corrector\n\nНе найдены правила для страны " + myCountryName + " " + myWaze.model.countries.top.id);
-                unsafeWindow.WME_CRT_onload = "Error";
-                delete WME_CRT_1_mainDictionaryTxt;
-                delete WME_CRT_1_publicDictionaryTxt;
-                return;
-      }
-
+                			unsafeWindow.mainDictionnaryKey = '18qup6nGuy6f0n0Jw-nCHcrJmH70aPJzYtkyfaWzZaPE';
+                			unsafeWindow.publicDictionnarykey = '1CLMGOuANq-1-XI4TYMoQ-Aqx5rlDXFPkZdryZt8IhT4';
+                			break;
+        			default:
+                			alert ("WME Corrector\n\nНе найдены правила для страны " + myCountryName + " " + myWaze.model.countries.top.id);
+                			unsafeWindow.WME_CRT_onload = "Error";
+                			delete WME_CRT_1_mainDictionaryTxt;
+                			delete WME_CRT_1_publicDictionaryTxt;
+                			return;
+			}
         GM_xmlhttpRequest({            
             method:  'GET',
             url: 	'https://docs.google.com/spreadsheets/d/' + unsafeWindow.mainDictionnaryKey +'/export?format=csv' ,      // безусловные правила
@@ -74,7 +74,6 @@ function WME_Corrector_init() {
                 unsafeWindow.WME_CRN_1_mainDictionaryTxt = mainDictionary.responseText;
             }
         });
-
         GM_xmlhttpRequest({
             method:  'GET',
             url: 'https://docs.google.com/spreadsheets/d/' + unsafeWindow.publicDictionnarykey +'/export?format=csv' ,      // опциональные правила
@@ -112,7 +111,7 @@ function limitForSaveNotReached() {
 
 // Отладочные сообщения
 function console_log(msg) {
-	if (console) { console.log("WME_Corrector: " + msg);}
+	if (console) { console.log("WME Corrector: " + msg);}
 }
 
 // вызываем загрузчик в конце скрипта
