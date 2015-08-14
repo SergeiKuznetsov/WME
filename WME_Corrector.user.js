@@ -18,11 +18,9 @@
 
 var WME_CRT_version = "0.1";
 
-function WME_Corrector_bootstrap()
-{
+function WME_Corrector_bootstrap() {
 	console_log("Wait...");
 	var bGreasemonkeyServiceDefined = false;
-
 	try
 	{
 		if ("object" === typeof Components.interfaces.gmIGreasemonkeyService)
@@ -47,8 +45,7 @@ function WME_Corrector_bootstrap()
 	WME_Corrector_init();
 } // WME_Corrector_bootstrap
 
-function WME_Corrector_init()
-{
+function WME_Corrector_init() {
 	console_log("Init...");
 	function waitForCountryTop () {
    	var myWaze = unsafeWindow.Waze;
@@ -60,11 +57,11 @@ function WME_Corrector_init()
                 unsafeWindow.publicDictionnarykey = '1CLMGOuANq-1-XI4TYMoQ-Aqx5rlDXFPkZdryZt8IhT4';
                 break;
             default:
-                alert ("WME Corrector\n\nНе найдены правила для страны "+ myCountryname + myWaze.model.countries.top.id);
+                alert ("WME Corrector\n\nНе найдены правила для страны " + myCountryName + " " + myWaze.model.countries.top.id);
                 unsafeWindow.WME_CRT_onload = "Error";
                 delete WME_CRT_1_mainDictionaryTxt;
                 delete WME_CRT_1_publicDictionaryTxt;
-                return ;
+                return;
         }
 
         GM_xmlhttpRequest({            
@@ -113,6 +110,7 @@ function limitForSaveNotReached() {
 	return (Waze.model.actionManager.index < 99);
 }
 
+// Отладочные сообщения
 function console_log(msg) {
 	if (console) { console.log("WME_Corrector: " + msg);}
 }
