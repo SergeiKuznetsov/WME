@@ -48,21 +48,21 @@ function WME_Corrector_bootstrap() {
 function WME_Corrector_init() {
 	console_log("Init...");
 	function waitForCountryTop () {
-   	var myWaze = unsafeWindow.Waze;
-  	if (myWaze && myWaze.model && myWaze.model.countries && myWaze.model.countries.top && myWaze.model.countries.top.id) {
-    	var myCountryName = myWaze.model.countries.objects[myWaze.model.countries.top.id].name;  
+		var myWaze = unsafeWindow.Waze;
+		if (myWaze && myWaze.model && myWaze.model.countries && myWaze.model.countries.top && myWaze.model.countries.top.id) {
+			var myCountryName = myWaze.model.countries.objects[myWaze.model.countries.top.id].name;  
       switch(myWaze.model.countries.top.id) {
-            case 186:	// Russia
+				case 186:	// Russia
                 unsafeWindow.mainDictionnaryKey = '18qup6nGuy6f0n0Jw-nCHcrJmH70aPJzYtkyfaWzZaPE';
                 unsafeWindow.publicDictionnarykey = '1CLMGOuANq-1-XI4TYMoQ-Aqx5rlDXFPkZdryZt8IhT4';
                 break;
-            default:
+        default:
                 alert ("WME Corrector\n\nНе найдены правила для страны " + myCountryName + " " + myWaze.model.countries.top.id);
                 unsafeWindow.WME_CRT_onload = "Error";
                 delete WME_CRT_1_mainDictionaryTxt;
                 delete WME_CRT_1_publicDictionaryTxt;
                 return;
-        }
+      }
 
         GM_xmlhttpRequest({            
             method:  'GET',
