@@ -138,5 +138,5 @@ function console_log(msg) {
 	if (console) { console.log("WME Corrector: " + msg);}
 }
 
-// вызываем загрузчик в конце скрипта
+// вызываем загрузчик в конце скрипта test
 WME_Corrector_bootstrap();
