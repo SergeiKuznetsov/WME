@@ -69,7 +69,7 @@ function WME_Corrector_init() {
 				},
 				synchronous: false,
 				onload: function(mainDictionary) {
-					unsafeWindow.WME_CRN_1_unconditionalRulesTxt = unconditionalRules.responseText;
+					unsafeWindow.WME_CRT_1_unconditionalRulesTxt = unconditionalRules.responseText;
 				}
 			});
 			GM_xmlhttpRequest({
